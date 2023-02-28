@@ -1,6 +1,6 @@
-package io.github.rukins.model;
+package io.github.rukins.gpsoauth.model;
 
-import io.github.rukins.annotation.Param;
+import io.github.rukins.gpsoauth.annotation.Param;
 
 import java.util.Locale;
 

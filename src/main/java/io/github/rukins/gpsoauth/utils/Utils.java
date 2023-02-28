@@ -1,8 +1,8 @@
-package io.github.rukins.utils;
+package io.github.rukins.gpsoauth.utils;
 
 import com.google.gson.Gson;
-import io.github.rukins.annotation.Param;
-import io.github.rukins.model.RequestParams;
+import io.github.rukins.gpsoauth.annotation.Param;
+import io.github.rukins.gpsoauth.model.RequestParams;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

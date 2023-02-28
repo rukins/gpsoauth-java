@@ -1,11 +1,11 @@
-package io.github.rukins;
+package io.github.rukins.gpsoauth;
 
-import io.github.rukins.client.AuthClient;
-import io.github.rukins.model.AccessToken;
-import io.github.rukins.model.AccessTokenRequestParams;
-import io.github.rukins.model.MasterToken;
-import io.github.rukins.model.MasterTokenRequestParams;
-import io.github.rukins.utils.Utils;
+import io.github.rukins.gpsoauth.client.AuthClient;
+import io.github.rukins.gpsoauth.model.AccessToken;
+import io.github.rukins.gpsoauth.model.MasterToken;
+import io.github.rukins.gpsoauth.model.MasterTokenRequestParams;
+import io.github.rukins.gpsoauth.utils.Utils;
+import io.github.rukins.gpsoauth.model.AccessTokenRequestParams;
 
 import java.net.http.HttpResponse;
 

@@ -1,4 +1,4 @@
-package io.github.rukins.model;
+package io.github.rukins.gpsoauth.model;
 
 import com.google.gson.annotations.SerializedName;
 

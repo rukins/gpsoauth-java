@@ -1,7 +1,7 @@
-package io.github.rukins.client;
+package io.github.rukins.gpsoauth.client;
 
-import io.github.rukins.model.RequestParams;
-import io.github.rukins.utils.Utils;
+import io.github.rukins.gpsoauth.model.RequestParams;
+import io.github.rukins.gpsoauth.utils.Utils;
 
 import java.io.IOException;
 import java.net.URI;

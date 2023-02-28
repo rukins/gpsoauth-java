@@ -1,4 +1,4 @@
-package io.github.rukins.annotation;
+package io.github.rukins.gpsoauth.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
