@@ -10,32 +10,24 @@ public class MasterTokenRequestParams implements RequestParams {
 
     private String lang;
 
-    @Param("google_play_services_version")
     private String googlePlayServicesVersion;
 
-    @Param("sdk_version")
     private Integer sdkVersion;
 
-    @Param("device_country")
     private String deviceCountry;
 
-    @Param("Email")
     private String email;
 
     private String service;
 
-    @Param("get_accountid")
     private Integer getAccountId;
 
-    @Param("ACCESS_TOKEN")
     private Integer accessToken;
 
     private String callerPkg;
 
-    @Param("add_account")
     private Integer addAccount;
 
-    @Param("Token")
     private String token;
 
     private String callerSig;
@@ -150,6 +142,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.lang = lang;
     }
 
+    @Param("google_play_services_version")
     public String getGooglePlayServicesVersion() {
         return googlePlayServicesVersion;
     }
@@ -158,6 +151,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.googlePlayServicesVersion = googlePlayServicesVersion;
     }
 
+    @Param("sdk_version")
     public Integer getSdkVersion() {
         return sdkVersion;
     }
@@ -166,6 +160,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.sdkVersion = sdkVersion;
     }
 
+    @Param("device_country")
     public String getDeviceCountry() {
         return deviceCountry;
     }
@@ -174,6 +169,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.deviceCountry = deviceCountry;
     }
 
+    @Param("Email")
     public String getEmail() {
         return email;
     }
@@ -190,6 +186,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.service = service;
     }
 
+    @Param("get_accountid")
     public Integer getGetAccountId() {
         return getAccountId;
     }
@@ -198,6 +195,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.getAccountId = getAccountId;
     }
 
+    @Param("ACCESS_TOKEN")
     public Integer getAccessToken() {
         return accessToken;
     }
@@ -214,6 +212,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.callerPkg = callerPkg;
     }
 
+    @Param("add_account")
     public Integer getAddAccount() {
         return addAccount;
     }
@@ -222,6 +221,7 @@ public class MasterTokenRequestParams implements RequestParams {
         this.addAccount = addAccount;
     }
 
+    @Param("Token")
     public String getToken() {
         return token;
     }

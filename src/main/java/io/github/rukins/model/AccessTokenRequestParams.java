@@ -10,16 +10,12 @@ public class AccessTokenRequestParams implements RequestParams {
 
     private String accountType;
 
-    @Param("Email")
     private String email;
 
-    @Param("has_permission")
     private Integer hasPermission;
 
-    @Param("EncryptedPasswd")
     private String masterToken;
 
-    @Param("service")
     private String scopes;
 
     private String source;
@@ -28,17 +24,14 @@ public class AccessTokenRequestParams implements RequestParams {
 
     private String app;
 
-    @Param("client_sig")
     private String clientSig;
 
-    @Param("device_country")
     private String deviceCountry;
 
     private String operatorCountry;
 
     private String lang;
 
-    @Param("sdk_version")
     private Integer sdkVersion;
 
     public static Builder builder() {
@@ -157,6 +150,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.accountType = accountType;
     }
 
+    @Param("Email")
     public String getEmail() {
         return email;
     }
@@ -165,6 +159,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.email = email;
     }
 
+    @Param("has_permission")
     public Integer getHasPermission() {
         return hasPermission;
     }
@@ -173,6 +168,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.hasPermission = hasPermission;
     }
 
+    @Param("EncryptedPasswd")
     public String getMasterToken() {
         return masterToken;
     }
@@ -181,6 +177,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.masterToken = masterToken;
     }
 
+    @Param("service")
     public String getScopes() {
         return scopes;
     }
@@ -213,6 +210,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.app = app;
     }
 
+    @Param("client_sig")
     public String getClientSig() {
         return clientSig;
     }
@@ -221,6 +219,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.clientSig = clientSig;
     }
 
+    @Param("device_country")
     public String getDeviceCountry() {
         return deviceCountry;
     }
@@ -245,6 +244,7 @@ public class AccessTokenRequestParams implements RequestParams {
         this.lang = lang;
     }
 
+    @Param("sdk_version")
     public Integer getSdkVersion() {
         return sdkVersion;
     }
