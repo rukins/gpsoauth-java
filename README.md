@@ -10,6 +10,7 @@ Simple library that can be used to get access some non-public Google APIs as an 
 - [Technologies and Libraries](#technologies-and-libraries)
 - [Similar libraries](#similar-libraries)
 - [Report Issues](#report-issues)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## General info
@@ -44,39 +45,60 @@ Follow these steps to take it:
 - Master token (starts with `aas_et/`) *never expires*
 - Access token (starts with `ya29.`) *expires in 1 hour*
 
+## Download
+### *Available [here](https://central.sonatype.com/artifact/io.github.rukins/gpsoauth/1.0)*
+#### Maven
+```xml
+<dependency>
+    <groupId>io.github.rukins</groupId>
+    <artifactId>gpsoauth</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+#### Gradle
+```groovy
+implementation group: 'io.github.rukins', name: 'gpsoauth', version: '1.0'
+```
+#### Gradle (Kotlin)
+```kotlin
+implementation("io.github.rukins:gpsoauth:1.0")
+```
+
 ## Simple example
+
 ```java
 package example;
 
-import io.github.rukins.Auth;
-import io.github.rukins.model.AccessToken;
-import io.github.rukins.model.AccessTokenRequestParams;
-import io.github.rukins.model.MasterToken;
-import io.github.rukins.model.MasterTokenRequestParams;
+import io.github.rukins.gpsoauth.Auth;
+import model.io.github.rukins.gpsoauth.AccessToken;
+import model.io.github.rukins.gpsoauth.AccessTokenRequestParams;
+import model.io.github.rukins.gpsoauth.MasterToken;
+import model.io.github.rukins.gpsoauth.MasterTokenRequestParams;
 
 public class Main {
-    public static void main(String[] args) {
-        Auth auth = new Auth();
+  public static void main(String[] args) {
+    Auth auth = new Auth();
 
-        MasterTokenRequestParams masterTokenRequestParams = MasterTokenRequestParams
-                .withDefaultValues()
-                .token("oauth2_4/***")
-                .build();
+    MasterTokenRequestParams masterTokenRequestParams = MasterTokenRequestParams
+            .withDefaultValues()
+            .email("example@gmail.com")
+            .token("oauth2_4/***")
+            .build();
 
-        MasterToken masterToken = auth.getMasterToken(masterTokenRequestParams);
+    MasterToken masterToken = auth.getMasterToken(masterTokenRequestParams);
 
-        AccessTokenRequestParams accessTokenRequestParams = AccessTokenRequestParams
-                .withDefaultValues()
-                .masterToken(masterToken.getMasterToken())
-                .app("com.google.android.keep")
-                .scopes("oauth2:https://www.googleapis.com/auth/memento https://www.googleapis.com/auth/reminders")
-                .build();
+    AccessTokenRequestParams accessTokenRequestParams = AccessTokenRequestParams
+            .withDefaultValues()
+            .masterToken(masterToken.getMasterToken())
+            .app("com.google.android.keep")
+            .scopes("oauth2:https://www.googleapis.com/auth/memento https://www.googleapis.com/auth/reminders")
+            .build();
 
-        AccessToken accessToken = auth.getAccessToken(accessTokenRequestParams);
-        
-        System.out.println(masterToken.getMasterToken());
-        System.out.println(accessToken.getAccessToken());
-    }
+    AccessToken accessToken = auth.getAccessToken(accessTokenRequestParams);
+
+    System.out.println(masterToken.getMasterToken());
+    System.out.println(accessToken.getAccessToken());
+  }
 }
 ```
 
@@ -84,9 +106,6 @@ public class Main {
 ```
 curl -i -X GET -H "Authorization: OAuth ya29.***" "https://www.googleapis.com/notes/v1/changes"
 ```
-
-## Download
-
 
 ## Technologies and Libraries
 - Java version: 17
