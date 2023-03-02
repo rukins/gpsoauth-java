@@ -46,22 +46,22 @@ Follow these steps to take it:
 - Access token (starts with `ya29.`) *expires in 1 hour*
 
 ## Download
-### *Available [here](https://central.sonatype.com/artifact/io.github.rukins/gpsoauth/1.0)*
+### *Available [here](https://central.sonatype.com/artifact/io.github.rukins/gpsoauth/1.0.1)*
 #### Maven
 ```xml
 <dependency>
     <groupId>io.github.rukins</groupId>
     <artifactId>gpsoauth</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 #### Gradle
 ```groovy
-implementation group: 'io.github.rukins', name: 'gpsoauth', version: '1.0'
+implementation group: 'io.github.rukins', name: 'gpsoauth', version: '1.0.1'
 ```
 #### Gradle (Kotlin)
 ```kotlin
-implementation("io.github.rukins:gpsoauth:1.0")
+implementation("io.github.rukins:gpsoauth:1.0.1")
 ```
 
 ## Simple example
@@ -70,6 +70,7 @@ implementation("io.github.rukins:gpsoauth:1.0")
 package example;
 
 import io.github.rukins.gpsoauth.Auth;
+import io.github.rukins.gpsoauth.exception.Error;
 import model.io.github.rukins.gpsoauth.AccessToken;
 import model.io.github.rukins.gpsoauth.AccessTokenRequestParams;
 import model.io.github.rukins.gpsoauth.MasterToken;
@@ -85,8 +86,15 @@ public class Main {
             .token("oauth2_4/***")
             .build();
 
-    MasterToken masterToken = auth.getMasterToken(masterTokenRequestParams);
+    MasterToken masterToken;
+    try {
+      masterToken = auth.getMasterToken(masterTokenRequestParams);
+    } catch (Error e) {
+      System.out.println(e.getErrorObject());
 
+      return;
+    }
+    
     AccessTokenRequestParams accessTokenRequestParams = AccessTokenRequestParams
             .withDefaultValues()
             .masterToken(masterToken.getMasterToken())
@@ -94,8 +102,15 @@ public class Main {
             .scopes("oauth2:https://www.googleapis.com/auth/memento https://www.googleapis.com/auth/reminders")
             .build();
 
-    AccessToken accessToken = auth.getAccessToken(accessTokenRequestParams);
+    AccessToken accessToken;
+    try {
+      accessToken = auth.getAccessToken(accessTokenRequestParams);
+    } catch (Error e) {
+      System.out.println(e.getErrorObject());
 
+      return;
+    }
+    
     System.out.println(masterToken.getMasterToken());
     System.out.println(accessToken.getAccessToken());
   }
@@ -109,7 +124,7 @@ curl -i -X GET -H "Authorization: OAuth ya29.***" "https://www.googleapis.com/no
 
 ## Technologies and Libraries
 - Java version: 17
-- Gson version: 2.10.1
+- Google Gson version: 2.10.1
 
 ## Similar libraries
 - Python: https://github.com/simon-weber/gpsoauth
