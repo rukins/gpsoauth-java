@@ -46,22 +46,21 @@ Follow these steps to take it:
 - Access token (starts with `ya29.`) *expires in 1 hour*
 
 ## Download
-### *Available [here](https://central.sonatype.com/artifact/io.github.rukins/gpsoauth/1.0.1)*
+### *Available [here](https://mvnrepository.com/artifact/io.github.rukins/gpsoauth)*
 #### Maven
 ```xml
 <dependency>
     <groupId>io.github.rukins</groupId>
     <artifactId>gpsoauth</artifactId>
-    <version>1.0.1</version>
 </dependency>
 ```
 #### Gradle
 ```groovy
-implementation group: 'io.github.rukins', name: 'gpsoauth', version: '1.0.1'
+implementation group: 'io.github.rukins', name: 'gpsoauth'
 ```
 #### Gradle (Kotlin)
 ```kotlin
-implementation("io.github.rukins:gpsoauth:1.0.1")
+implementation("io.github.rukins:gpsoauth")
 ```
 
 ## Simple example
@@ -70,7 +69,7 @@ implementation("io.github.rukins:gpsoauth:1.0.1")
 package example;
 
 import io.github.rukins.gpsoauth.Auth;
-import io.github.rukins.gpsoauth.exception.Error;
+import io.github.rukins.gpsoauth.exception.AuthError;
 import model.io.github.rukins.gpsoauth.AccessToken;
 import model.io.github.rukins.gpsoauth.AccessTokenRequestParams;
 import model.io.github.rukins.gpsoauth.MasterToken;
@@ -82,19 +81,18 @@ public class Main {
 
     MasterTokenRequestParams masterTokenRequestParams = MasterTokenRequestParams
             .withDefaultValues()
-            .email("example@gmail.com")
             .token("oauth2_4/***")
             .build();
 
     MasterToken masterToken;
     try {
       masterToken = auth.getMasterToken(masterTokenRequestParams);
-    } catch (Error e) {
+    } catch (AuthError e) {
       System.out.println(e.getErrorObject());
 
       return;
     }
-    
+
     AccessTokenRequestParams accessTokenRequestParams = AccessTokenRequestParams
             .withDefaultValues()
             .masterToken(masterToken.getMasterToken())
@@ -105,7 +103,7 @@ public class Main {
     AccessToken accessToken;
     try {
       accessToken = auth.getAccessToken(accessTokenRequestParams);
-    } catch (Error e) {
+    } catch (AuthError e) {
       System.out.println(e.getErrorObject());
 
       return;
