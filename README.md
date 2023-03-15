@@ -7,8 +7,6 @@ Simple library that can be used to get access some non-public Google APIs as an 
   - [Types of tokens](#types-of-tokens)
 - [Download](#download)
 - [Simple example](#simple-example)
-- [Technologies and Libraries](#technologies-and-libraries)
-- [Similar libraries](#similar-libraries)
 - [Report Issues](#report-issues)
 - [Contributing](#contributing)
 - [License](#license)
@@ -66,14 +64,10 @@ implementation("io.github.rukins:gpsoauth")
 ## Simple example
 
 ```java
-package example;
-
 import io.github.rukins.gpsoauth.Auth;
 import io.github.rukins.gpsoauth.exception.AuthError;
-import model.io.github.rukins.gpsoauth.AccessToken;
-import model.io.github.rukins.gpsoauth.AccessTokenRequestParams;
-import model.io.github.rukins.gpsoauth.MasterToken;
-import model.io.github.rukins.gpsoauth.MasterTokenRequestParams;
+import io.github.rukins.gpsoauth.model.MasterToken;
+import io.github.rukins.gpsoauth.model.MasterTokenRequestParams;
 
 public class Main {
   public static void main(String[] args) {
@@ -108,7 +102,7 @@ public class Main {
 
       return;
     }
-    
+
     System.out.println(masterToken.getMasterToken());
     System.out.println(accessToken.getAccessToken());
   }
@@ -119,18 +113,6 @@ public class Main {
 ```
 curl -i -X GET -H "Authorization: OAuth ya29.***" "https://www.googleapis.com/notes/v1/changes"
 ```
-
-## Technologies and Libraries
-- Java version: 17
-- Google Gson version: 2.10.1
-
-## Similar libraries
-- Python: https://github.com/simon-weber/gpsoauth
-- Node.js: https://github.com/GoneToneStudio/node-google-play-api
-- C#: https://github.com/vemacs/GPSOAuthSharp
-- Ruby: https://github.com/bryanmytko/gpsoauth
-- Java: https://github.com/svarzee/gpsoauth-java
-- C++: https://github.com/dvirtz/gpsoauth-cpp and https://github.com/Iciclelz/gpsoauthclient
 
 ## Report Issues
 In the [Issues](https://github.com/rukins/gpsoauth/issues) section you can suggest any improvements and report any bugs you find
