@@ -14,28 +14,48 @@ Simple library that can be used to get access some non-public Google APIs as an 
 ## General info
 
 ### Receiving an authentication token
-To get a master token, firstly you need to receive an authentication token.
+To get a master token, firstly you need to receive an authentication token. 
+In a nutshell, you just need to obtain the value of the `oauth_token` cookie after logging in to your Google account via https://accounts.google.com/EmbeddedSetup
 
-Follow these steps to take it:
-1. Go [here](https://accounts.google.com/EmbeddedSetup), log in with a Google account and agree to the terms \
+Detailed instructions are provided below (I use Google Chrome, but I think the actions are similar in other browsers):
+
+#### First way
+1. Go [here](https://accounts.google.com/EmbeddedSetup), log in to your Google account and agree to the terms \
 \
 ![step1](./doc/images/step1-to-receive-auth-token.png)
 
 2. Find the `lock` \
 \
-![step1](./doc/images/step2-to-receive-auth-token.png)
+![step1](./doc/images/way1-step2-to-receive-auth-token.png)
 
-3. Go to the `Cookie` section \
+3. Go to the `Cookies` section \
 \
-![step1](./doc/images/step3-to-receive-auth-token.png)
+![step1](./doc/images/way1-step3-to-receive-auth-token.png)
 
 4. Expand the `accounts.google.com` dropdown menu \
 \
-![step1](./doc/images/step4-to-receive-auth-token.png)
+![step1](./doc/images/way1-step4-to-receive-auth-token.png)
 
-5. Find the `oauth_token` inside the `Cookie` menu and copy a token from the `Content` field \
+5. Find the `oauth_token` inside the `Cookies` menu and copy the token from the `Content` field \
 \
-![step1](./doc/images/step5-to-receive-auth-token.png)
+![step1](./doc/images/way1-step5-to-receive-auth-token.png)
+
+
+#### Second way
+
+1. Go [here](https://accounts.google.com/EmbeddedSetup), log in to your Google account and agree to the terms \
+\
+![step1](./doc/images/step1-to-receive-auth-token.png)
+
+2. Open `Developer tools`
+
+3. Go to the `Application` section and look for `https://accounts.google.com` inside `Cookies` dropdown menu \
+\
+![step1](./doc/images/way2-step2-to-receive-auth-token.png)
+
+4. Expand the `accounts.google.com` dropdown menu, find the `oauth_token` and copy the Cookie value  \
+\
+![step1](./doc/images/way2-step4-to-receive-auth-token.png)
 
 ### Types of tokens
 
