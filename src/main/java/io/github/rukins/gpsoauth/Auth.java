@@ -5,13 +5,11 @@ import io.github.rukins.gpsoauth.exception.AuthError;
 import io.github.rukins.gpsoauth.model.*;
 import io.github.rukins.gpsoauth.utils.Utils;
 
-import java.net.http.HttpResponse;
-
 public class Auth {
     private final AuthClient authClient = new AuthClient();
 
     public MasterToken getMasterToken(MasterTokenRequestParams params) throws AuthError {
-        HttpResponse<String> response = authClient.post(params);
+        AuthClient.HttpResponse response = authClient.post(params);
 
         checkIfError(response);
 
@@ -19,14 +17,14 @@ public class Auth {
     }
 
     public AccessToken getAccessToken(AccessTokenRequestParams params) throws AuthError {
-        HttpResponse<String> response = authClient.post(params);
+        AuthClient.HttpResponse response = authClient.post(params);
 
         checkIfError(response);
 
         return Utils.getObjectFromString(response.body(), AccessToken.class);
     }
 
-    private void checkIfError(HttpResponse<String> response) throws AuthError {
+    private void checkIfError(AuthClient.HttpResponse response) throws AuthError {
         if (response.statusCode() != 200) {
             AuthErrorObject authErrorObject = Utils.getObjectFromString(response.body(), AuthErrorObject.class);
             authErrorObject.setStatusCode(response.statusCode());
