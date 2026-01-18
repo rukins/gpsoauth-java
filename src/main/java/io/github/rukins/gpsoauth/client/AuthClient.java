@@ -2,55 +2,71 @@ package io.github.rukins.gpsoauth.client;
 
 import io.github.rukins.gpsoauth.model.RequestParams;
 import io.github.rukins.gpsoauth.utils.Utils;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Map;
 
 public class AuthClient {
     public static final String AUTH_URI = "https://android.clients.google.com/auth";
 
-    private final HttpClient client = HttpClient.newHttpClient();
+    private final OkHttpClient client = new OkHttpClient();
 
-    public HttpResponse<String> post(RequestParams params) {
+    public HttpResponse post(RequestParams params) {
         return post(params, null, Map.of("Accept", "*/*"));
     }
 
-    public HttpResponse<String> post(RequestParams params,
-                                     String body,
-                                     Map<String, String> headers) {
-        HttpRequest request;
-        try {
-            request = HttpRequest.newBuilder()
-                    .uri(
-                            new URI(AUTH_URI + Utils.getParamsStringFromObject(params))
-                    )
-                    .headers(
-                            headers.entrySet().stream()
-                                    .map(h -> Arrays.asList(h.getKey(), h.getValue()))
-                                    .flatMap(Collection::stream)
-                                    .toArray(String[]::new)
-                    )
-                    .POST(
-                            body != null
-                                    ? HttpRequest.BodyPublishers.ofString(body)
-                                    : HttpRequest.BodyPublishers.noBody()
-                    )
-                    .build();
-        } catch (URISyntaxException e) {
+    public HttpResponse post(RequestParams params,
+                             String body,
+                             Map<String, String> headers) {
+        String url = AUTH_URI + Utils.getParamsStringFromObject(params);
+        
+        Request.Builder requestBuilder = new Request.Builder()
+                .url(url);
+        
+        // Add headers
+        for (Map.Entry<String, String> header : headers.entrySet()) {
+            requestBuilder.addHeader(header.getKey(), header.getValue());
+        }
+        
+        // Add body
+        RequestBody requestBody = body != null
+                ? RequestBody.create(body, MediaType.parse("text/plain"))
+                : RequestBody.create("", null);
+        requestBuilder.post(requestBody);
+        
+        Request request = requestBuilder.build();
+        
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body() != null ? response.body().string() : "";
+            return new HttpResponse(response.code(), responseBody);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        try {
-            return client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+    }
+    
+    /**
+     * Simple wrapper class to maintain API compatibility
+     */
+    public static class HttpResponse {
+        private final int statusCode;
+        private final String body;
+        
+        public HttpResponse(int statusCode, String body) {
+            this.statusCode = statusCode;
+            this.body = body;
+        }
+        
+        public int statusCode() {
+            return statusCode;
+        }
+        
+        public String body() {
+            return body;
         }
     }
 }
