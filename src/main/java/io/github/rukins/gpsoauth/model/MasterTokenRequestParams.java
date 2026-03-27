@@ -2,7 +2,9 @@ package io.github.rukins.gpsoauth.model;
 
 import io.github.rukins.gpsoauth.annotation.Param;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class MasterTokenRequestParams implements RequestParams {
     private MasterTokenRequestParams() {
@@ -33,6 +35,8 @@ public class MasterTokenRequestParams implements RequestParams {
     private String callerSig;
 
     private String droidguardResults;
+
+    private final Map<String, String> additionalParams = new HashMap<>();
 
     public static Builder builder() {
         return new Builder();
@@ -134,6 +138,12 @@ public class MasterTokenRequestParams implements RequestParams {
 
         public Builder droidguardResults(String droidguardResults) {
             parameters.setDroidguardResults(droidguardResults);
+
+            return this;
+        }
+
+        public Builder setParam(String param, String value) {
+            parameters.setParam(param, value);
 
             return this;
         }
@@ -254,5 +264,14 @@ public class MasterTokenRequestParams implements RequestParams {
 
     public void setDroidguardResults(String droidguardResults) {
         this.droidguardResults = droidguardResults;
+    }
+
+    @Override
+    public Map<String, String> getParams() {
+        return additionalParams;
+    }
+
+    public void setParam(String param, String value) {
+        additionalParams.put(param, value);
     }
 }

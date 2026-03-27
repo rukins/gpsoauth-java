@@ -2,7 +2,9 @@ package io.github.rukins.gpsoauth.model;
 
 import io.github.rukins.gpsoauth.annotation.Param;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class AccessTokenRequestParams implements RequestParams {
     private AccessTokenRequestParams() {
@@ -33,6 +35,8 @@ public class AccessTokenRequestParams implements RequestParams {
     private String lang;
 
     private Integer sdkVersion;
+
+    private final Map<String, String> additionalParams = new HashMap<>();
 
     public static Builder builder() {
         return new Builder();
@@ -133,6 +137,12 @@ public class AccessTokenRequestParams implements RequestParams {
 
         public Builder sdkVersion(Integer sdkVersion) {
             parameters.setSdkVersion(sdkVersion);
+
+            return this;
+        }
+
+        public Builder setParam(String param, String value) {
+            parameters.setParam(param, value);
 
             return this;
         }
@@ -251,5 +261,14 @@ public class AccessTokenRequestParams implements RequestParams {
 
     public void setSdkVersion(Integer sdkVersion) {
         this.sdkVersion = sdkVersion;
+    }
+
+    @Override
+    public Map<String, String> getParams() {
+        return additionalParams;
+    }
+
+    public void setParam(String param, String value) {
+        additionalParams.put(param, value);
     }
 }

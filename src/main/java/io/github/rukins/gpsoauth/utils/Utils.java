@@ -21,7 +21,7 @@ public class Utils {
     }
 
     public static String getParamsStringFromObject(RequestParams params) {
-        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> paramsMap = new HashMap<>(params.getParams());
 
         for (Method method : params.getClass().getDeclaredMethods()) {
             if (method.getName().startsWith("get")) {
@@ -36,7 +36,11 @@ public class Utils {
                     throw new RuntimeException(e);
                 }
 
-                paramsMap.put(name, value != null ? value.toString() : null);
+                if (value == null) {
+                    continue;
+                }
+
+                paramsMap.put(name, value.toString());
             }
         }
 
