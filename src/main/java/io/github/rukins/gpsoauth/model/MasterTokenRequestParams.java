@@ -32,6 +32,8 @@ public class MasterTokenRequestParams implements RequestParams {
 
     private String callerSig;
 
+    private String droidguardResults;
+
     public static Builder builder() {
         return new Builder();
     }
@@ -49,7 +51,8 @@ public class MasterTokenRequestParams implements RequestParams {
                 .accessToken(1)
                 .callerPkg("com.google.android.gms")
                 .addAccount(1)
-                .callerSig("38918a453d07199354f8b19af05ec6562ced5788");
+                .callerSig("38918a453d07199354f8b19af05ec6562ced5788")
+                .droidguardResults("null");
     }
 
     public static class Builder {
@@ -125,6 +128,12 @@ public class MasterTokenRequestParams implements RequestParams {
 
         public Builder callerSig(String callerSig) {
             parameters.setCallerSig(callerSig);
+
+            return this;
+        }
+
+        public Builder droidguardResults(String droidguardResults) {
+            parameters.setDroidguardResults(droidguardResults);
 
             return this;
         }
@@ -236,5 +245,14 @@ public class MasterTokenRequestParams implements RequestParams {
 
     public void setCallerSig(String callerSig) {
         this.callerSig = callerSig;
+    }
+
+    @Param("droidguard_results")
+    public String getDroidguardResults() {
+        return droidguardResults;
+    }
+
+    public void setDroidguardResults(String droidguardResults) {
+        this.droidguardResults = droidguardResults;
     }
 }
